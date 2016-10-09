@@ -1,0 +1,62 @@
+- defaultCover = "https://cdn.hyperdev.com/us-east-1%3A95b2e926-0979-4549-9c32-57eb63fab31c%2FBnRiXylCYAAKzD5.png"
+
+head
+  title= title
+  meta(name="description" content="Draw some feelings!")
+  link(id="favicon" rel="icon" href="https://hyperdev.com/favicon.ico" type="image/x-icon")
+  meta(charset="utf-8")
+  meta(http-equiv="X-UA-Compatible" content="IE=edge")
+  meta(name="viewport" content="width=device-width, initial-scale=1")
+  link(rel="stylesheet" href="/style.css")
+  include meta-seo
+body
+
+  header
+    a(href=url)
+      h1= title
+    h2= description
+
+  main
+    ul.records
+      - each record, index in records
+        - name = record.get('Name')
+        - speaker = record.get('Speaker')
+        - event = record.get('Event')
+        - category = record.get('Category')
+        - tags = record.get('Tags')
+        - minutes = record.get('Minutes')
+        - why = record.get('Why')
+        - duration = record.get('Duration')
+        - link = record.get('Link')
+        - embed = record.get('Embed')
+        li.record(data-embed=embed)
+          // a.name-link(href=link)
+          p.name(style="background-color: #{randomcolors[index]}")= name
+          .embed.hidden
+          img.cover(src=defaultCover)
+          p.speaker= speaker
+          p.minutes
+            span.clock 🕓
+            span= minutes
+            span= " minutes"
+          // p.event= event
+          // p.category= category
+          p.tags
+          if tags
+            - for tag in tags
+              span.tag= tag
+          p.why= why
+
+  footer
+    hr
+    p ＿φ( °-°)/
+    p= "Made by "
+      a(href="https://twitter.com/mcgeerosa") @mcgeerosa
+      span= " and "
+      a(href="https://twitter.com/pketh") @pketh
+
+    a(href="https://hyperdev.com/#!/project/calico-rabbit")
+      p View Code
+
+script(src="https://code.jquery.com/jquery-3.1.1.min.js")
+script(src="client.js")
